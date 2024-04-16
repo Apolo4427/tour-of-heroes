@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>Top heroes</h2>
+    <div class="container">
+       @for (hero of heroList; track $index){
+        <ul class="list-group center">
+            <li class="list-group-item list-group-item-action list-group-item-warning"
+            (click)="onDetail(hero.id)"><a><span>{{hero.id}}: </span> {{hero.name}} </a></li>
+        </ul>
+       }
+    </div>
+</div>
