@@ -14,20 +14,24 @@
             <a class="nav-link" routerLink="hero">List of Heroes</a>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-          #searchBox (input)="searchHero(searchBox.value)">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="d-flex" role="search" [formGroup]="searchForm">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" formControlName="input"
+          (input)="searchHero()">
+          <button class="btn btn-outline-success" type="button" (click)="onSearch()">Search</button>
         </form>
       </div>
     </div>
   </nav>
-  <ul class="list-group">
-    <li *ngFor="let hero of heroes$ | async" class="list-group-item list-group-item-action list-group-item-success detail"
-    (click)="onDetail(hero.id)">
-      {{hero.name}} 
-    </li>
-  </ul>
+  <div class="container">
+    @if(searchForm.get('input')?.value != ''){
+      <ul class="list-group">
+        <li *ngFor="let hero of heroes$ | async" class="list-group-item list-group-item-action list-group-item-success detail"
+        (click)="onDetail(hero.id)">
+          {{hero.name}} 
+        </li>
+      </ul>
+    }
+  </div>
 </div>
 
 

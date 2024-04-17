@@ -8,6 +8,16 @@ import { Observable, of, retry } from 'rxjs';
 })
 export class HeroServiceService {
 
+  wantedHero?:string;
+
+  setWantedHero(term:string){
+    this.wantedHero = term;
+  }
+
+  getWantedHero(){
+    return this.wantedHero;
+  }
+
   getHeroes():Observable<Hero[]>{
     let heroes = of(HEROES);//no es necesario tipar la variable heroes
     return  heroes;
