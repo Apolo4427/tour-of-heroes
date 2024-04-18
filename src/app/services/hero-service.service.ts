@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
-import { Observable, of, retry } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroServiceService {
 
-  wantedHero?:string;
+  wantedListHero?:Hero[];
+  private restart=new BehaviorSubject<boolean>(false);
 
-  setWantedHero(term:string){
-    this.wantedHero = term;
+  setWantedHero(heroList:Hero[]|undefined){
+    this.wantedListHero = heroList;
   }
 
-  getWantedHero(){
-    return this.wantedHero;
+  getWantedHero():Hero[]|undefined{
+    return this.wantedListHero;
   }
 
   getHeroes():Observable<Hero[]>{
@@ -35,6 +36,15 @@ export class HeroServiceService {
     const heroes = HEROES.filter(hero => hero.name.toLowerCase().includes(term.toLowerCase()));
 
     return of(heroes)//devolvemos la lista que coninsida con el termino de la busqueda
+  }
+
+  restartComponent(){
+    this.restart.next(true);
+    setTimeout(()=> this.restart.next(false));
+  }
+
+  get restarObservable(): Observable<boolean>{
+    return this.restart.asObservable();
   }
 
   addHero(){

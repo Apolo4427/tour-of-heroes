@@ -25,7 +25,6 @@ export class HeroDetailComponent implements OnInit{
     this._activateRouter.params.subscribe(params =>{
       this.hero = this._heroService.getHeroById(params['id']);
     })
-    console.log(this.hero);
   }
 
   goBack(){
