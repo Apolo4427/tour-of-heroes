@@ -16,8 +16,8 @@
         </ul>
         <form class="d-flex" role="search" [formGroup]="searchForm">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" formControlName="input"
-          (input)="searchHero()">
-          <button class="btn btn-outline-success" type="button" (click)="onSearch()">Search</button>
+          (input)="searchHero()" (keydown.enter)="onSearch()">
+          <button class="btn btn-outline-success" type="button" (click)="onSearch()" >Search</button>
         </form>
       </div>
     </div>
